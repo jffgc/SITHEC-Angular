@@ -1,0 +1,82 @@
+<div class="container">
+    <section class="pt-5">
+        <div class="row">
+            <h3 class="pt-5">Favoritos</h3>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <table>
+                    <tbody>
+                        <tr *ngFor="let pokemon of pokemonsSave">
+                            <td>
+                                {{ pokemon.id }} -
+                            </td>
+                            <td>
+                                {{ pokemon.name }}
+                            </td>
+                            <td>
+                                <button (click)="showInformation(pokemon.id);" btn btn-secundary>Ver mas..</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <ng-container *ngIf="infoPokemon">
+                    <table id="info">
+                        <tr>
+                            <td id="infotd">
+                                <strong>Nombre:</strong>
+                            </td>
+                            <td id="infotd">
+                                <strong>{{infoPokemon.name}}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <img src="{{ infoPokemon.sprites.back_default }}" alt="">
+                                <img src="{{ infoPokemon.sprites.back_shiny }}" alt="">
+                                <img src="{{ infoPokemon.sprites.front_default }}" alt="">
+                                <img src="{{ infoPokemon.sprites.front_shiny }}" alt="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="infotd">Experiencia:</td>
+                            <td id="infotd">
+                                {{infoPokemon.base_experience}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="infotd">Altura:</td>
+                            <td id="infotd">{{infoPokemon.height}}</td>
+                        </tr>
+                        <tr>
+                            <td id="infotd">Peso:</td>
+                            <td id="infotd">{{infoPokemon.weight}}</td>
+                        </tr>
+                        <tr>
+                            <td id="infotd">Expecie:</td>
+                            <td id="infotd">{{infoPokemon.species.name}}</td>
+                        </tr>
+                        <tr>
+                            <td id="infotd">Habilidades: </td>
+                            <td id="infotd">
+                                <li *ngFor="let ability of infoPokemon?.abilities">
+                                    {{ability.ability.name}}
+                                </li>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="infotd">Juegos: </td>
+                            <td id="infotd">
+                                <li *ngFor="let game of infoPokemon?.game_indices">
+                                    {{game.version.name}}
+                                </li>
+                            </td>
+                        </tr>
+                    </table>
+                </ng-container>
+            </div>
+        </div>
+    </section>
+</div>

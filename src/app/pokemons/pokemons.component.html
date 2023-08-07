@@ -1,0 +1,95 @@
+<div class="container">
+    <section class="pt-5">
+        <div class="row">
+            <h3 class="pt-5">Lista de Pokemons</h3>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <table>
+                    <tbody>
+                        <tr *ngFor="let pokemon of pokemons">
+                            <td>
+                                {{ pokemon.id }} -
+                            </td>
+                            <td>
+                                {{ pokemon.name }}
+                            </td>
+                            <td>
+                                <button (click)="showInformation(pokemon.id, pokemon.index);" btn btn-secundary>Ver mas..</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td *ngIf="offset > 0">
+                                <button (click)="decrement();" class="btn btn-primary">-</button>
+                            </td>
+                            <td *ngIf="offset <= 1270">
+                                <button (click)="increment();" class="btn btn-primary">+</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <ng-container *ngIf="infoPokemon">
+                    <table id="info">
+                        <tr>
+                            <td id="infotd">
+                                <strong>Nombre:</strong>
+                            </td>
+                            <td id="infotd">
+                                <strong>{{infoPokemon.name}}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <img src="{{ infoPokemon.sprites.back_default }}" alt="">
+                                <img src="{{ infoPokemon.sprites.back_shiny }}" alt="">
+                                <img src="{{ infoPokemon.sprites.front_default }}" alt="">
+                                <img src="{{ infoPokemon.sprites.front_shiny }}" alt="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="infotd">Experiencia:</td>
+                            <td id="infotd">
+                                {{infoPokemon.base_experience}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="infotd">Altura:</td>
+                            <td id="infotd">{{infoPokemon.height}}</td>
+                        </tr>
+                        <tr>
+                            <td id="infotd">Peso:</td>
+                            <td id="infotd">{{infoPokemon.weight}}</td>
+                        </tr>
+                        <tr>
+                            <td id="infotd">Expecie:</td>
+                            <td id="infotd">{{infoPokemon.species.name}}</td>
+                        </tr>
+                        <tr>
+                            <td id="infotd">Habilidades: </td>
+                            <td id="infotd">
+                                <li *ngFor="let ability of infoPokemon?.abilities">
+                                    {{ability.ability.name}}
+                                </li>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="infotd">Juegos: </td>
+                            <td id="infotd">
+                                <li *ngFor="let game of infoPokemon?.game_indices">
+                                    {{game.version.name}}
+                                </li>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <button (click)="save();" class="btn btn-warning w-100">Agregar a favoritos</button>
+                            </td>
+                        </tr>
+                    </table>
+                </ng-container>
+            </div>
+        </div>
+    </section>
+</div>
